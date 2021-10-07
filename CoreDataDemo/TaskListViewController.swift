@@ -66,6 +66,7 @@ class TaskListViewController: UITableViewController {
         }
     }
     
+    
     private func showAlert(with title: String, and message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
@@ -116,6 +117,19 @@ extension TaskListViewController {
     }
 }
 
+// MARK: - UITableViewDelegate
+
+extension TaskListViewController {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+       
+            taskList.remove(at: indexPath.row)
+            
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+}
 // MARK: - TaskViewControllerDelegate
 extension TaskListViewController: TaskViewControllerDelegate {
     func reloadData() {

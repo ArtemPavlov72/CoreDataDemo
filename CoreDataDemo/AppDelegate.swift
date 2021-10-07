@@ -20,10 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    // при выгрузке приложения из памяти, происходит сохранение приложения в памяти
     func applicationWillTerminate(_ application: UIApplication) {
         saveContext()
     }
 
+    
+// вынести все ниже в отдельный класс, убрать lazy
     // MARK: - Core Data stack
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "CoreDataDemo")
