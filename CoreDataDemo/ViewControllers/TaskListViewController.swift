@@ -6,14 +6,15 @@
 //
 
 import UIKit
-import CoreData
+//import CoreData
 
 protocol TaskViewControllerDelegate {
     func reloadData()
 }
 
 class TaskListViewController: UITableViewController {
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private let context = StorageManager.shared.getContext()
+    
     private let cellID = "task"
     private var taskList: [Task] = []
 
@@ -83,8 +84,9 @@ class TaskListViewController: UITableViewController {
     }
     
     private func save(_ taskName: String) {
-        guard let entityDescription = NSEntityDescription.entity(forEntityName: "Task", in: context) else { return }
-        guard let task = NSManagedObject(entity: entityDescription, insertInto: context) as? Task else { return }
+     /*  guard let entityDescription = NSEntityDescription.entity(forEntityName: "Task", in: context) else { return }
+        guard let task = NSManagedObject(entity: entityDescription, insertInto: context) as? Task else { return } */
+        let task = StorageManager.entityDescription()
         task.title = taskName
         taskList.append(task)
         
